@@ -56,6 +56,72 @@ export const experiences = [
 
 export const projects = [
   {
+    title: "TERRA-NAV: AI-Powered Off-Road Terrain Intelligence System",
+    problem: "Conventional off-road vehicles react to difficult terrain only after encountering it, leading to reduced stability, passenger discomfort, and increased mechanical stress.",
+    solution: "Developed an AI-powered perception system that detects off-road terrain and obstacles in real time, analyzes terrain severity, and enables proactive suspension adaptation before the vehicle reaches challenging terrain.",
+    businessValue: "Improves off-road driving safety, ride comfort, and vehicle durability through predictive terrain understanding and intelligent suspension control.",
+    keyFeatures: [
+      "Custom YOLOv8 terrain detection",
+      "Live camera & video analysis",
+      "Terrain severity estimation",
+      "Proactive suspension adaptation",
+      "Real-time analytics dashboard",
+      "Digital twin visualization",
+      "WebSocket-based live inference",
+      "FastAPI backend with React frontend"
+    ],
+    tech: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "FastAPI",
+      "Python",
+      "OpenCV",
+      "YOLOv8",
+      "PyTorch",
+      "WebSocket",
+      "Vite"
+    ],
+    githubHref: "https://github.com/mukeshs2024/tata_innovent.git",
+    demoHref: null,
+    status: "Completed",
+    imageFolder: "/portfolio/projects/terra-nav/",
+  },
+  {
+    title: "Smart Traffic Management System",
+    problem: "Traditional traffic signal systems rely on fixed timings and cannot adapt to real-time traffic conditions, resulting in congestion, longer travel times, and delayed emergency response.",
+    solution: "Developed an AI-powered traffic management system that simulates adaptive traffic signal control, synchronizes multiple intersections, prioritizes emergency vehicles, and provides real-time traffic analytics to optimize urban traffic flow.",
+    businessValue: "Reduces traffic congestion, minimizes vehicle waiting time, improves emergency response efficiency, and enables smarter urban transportation through intelligent traffic control.",
+    keyFeatures: [
+      "Adaptive traffic signal control based on real-time traffic demand",
+      "Multi-intersection synchronization (Green Wave, Offset, Alternating & Independent modes)",
+      "Emergency vehicle priority and signal preemption",
+      "Real-time traffic simulation with realistic vehicle physics",
+      "Live traffic dashboard with congestion and performance analytics",
+      "Collision avoidance and queue detection",
+      "Optional YOLOv8 vehicle detection and classification",
+      "Interactive traffic visualization using Canvas API"
+    ],
+    tech: [
+      "JavaScript (ES6)",
+      "HTML5",
+      "CSS3",
+      "Node.js",
+      "Express.js",
+      "Canvas 2D API",
+      "SUMO",
+      "Python",
+      "YOLOv8",
+      "OpenCV",
+      "Git",
+      "npm"
+    ],
+    githubHref: "https://github.com/mukeshs2024/smart_traffic_management_system.git",
+    demoHref: "https://smart-traffic-management-system-green.vercel.app/",
+    status: "Completed",
+    imageFolder: "/portfolio/projects/smart-traffic/",
+  },
+  {
     title: "ReUseMart",
     problem: "Buying and selling used products lacks organization and trust.",
     solution: "Developed a marketplace platform for managing second-hand products.",

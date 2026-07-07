@@ -57,7 +57,7 @@ function StackedCard({ children, index, total }: { children: React.ReactNode, in
       style={{
         top: `calc(100px + ${index * 30}px)`,
         zIndex: index + 10,
-        marginBottom: index === total - 1 ? '0' : '25vh'
+        marginBottom: index === total - 1 ? '0' : '8vh'
       }}
     >
       <div className="bg-[#0A0A0A] border border-[rgba(249,115,22,0.20)] rounded-[24px] shadow-[0_20px_60px_rgba(0,0,0,0.45)] hover:-translate-y-1 transition-transform duration-500 ease-out p-6 md:p-8 will-change-transform">
