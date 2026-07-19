@@ -11,7 +11,7 @@ export function TechBadge({ name, compact = false }: TechBadgeProps) {
   const imageSize = compact ? 14 : 18;
 
   return (
-    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-semibold bg-gray-800 text-gray-200 border border-white/5">
+    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-none text-xs font-mono font-bold bg-secondarybg text-heading border border-bordercol hover:border-accent hover:shadow-[0_0_8px_rgba(240,122,82,0.15)] transition-all uppercase tracking-wider">
       {logoUrl ? (
         <img
           src={logoUrl}
@@ -21,7 +21,7 @@ export function TechBadge({ name, compact = false }: TechBadgeProps) {
           className="object-contain"
         />
       ) : (
-        <span className="w-3.5 h-3.5 flex items-center justify-center bg-gray-700 text-white rounded text-[10px] font-bold">
+        <span className="w-3.5 h-3.5 flex items-center justify-center bg-surface text-accent rounded-none text-[10px] font-bold border border-bordercol">
           {name.charAt(0)}
         </span>
       )}

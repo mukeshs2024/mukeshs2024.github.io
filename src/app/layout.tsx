@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const bodyFont = Inter({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-body" });
-const headingFont = Inter({ subsets: ["latin"], weight: ["700", "800"], variable: "--font-heading" });
+const bodyFont = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-body" });
+const headingFont = IBM_Plex_Mono({ subsets: ["latin"], weight: ["700"], variable: "--font-heading" });
 
 export const metadata: Metadata = {
   title: "Mukesh S | Aspiring Data Analyst",

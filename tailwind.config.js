@@ -5,33 +5,41 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#FFFFFF",
-        secondary: "#B3B3B3",
-        accent: "#F97316",
-        darkbg: "#000000",
+        darkbg: "#0B0B0B",
+        secondarybg: "#111111",
         surface: "#111111",
-        bordercol: "rgba(255, 255, 255, 0.08)",
+        accent: "#F07A52",
+        accentHover: "#FF8A65",
+        muted: "#9C9C9C",
+        body: "#EAEAEA",
+        heading: "#EAEAEA",
+        bordercol: "rgba(255, 255, 255, 0.12)",
+        gridcol: "rgba(240, 122, 82, 0.08)",
+        activeborder: "#F07A52",
+      },
+      fontFamily: {
+        sans: ["Geist", "Inter", "Helvetica Neue", "sans-serif"],
+        mono: ["IBM Plex Mono", "Roboto Mono", "Geist Mono", "monospace"],
       },
       boxShadow: {
-        premium: "0 24px 80px rgba(13, 27, 76, 0.12)",
+        none: "none",
       },
       backgroundImage: {
-        "hero-radial": "radial-gradient(circle at top left, rgba(245,166,35,0.16), transparent 34%), radial-gradient(circle at top right, rgba(13,27,76,0.12), transparent 30%), linear-gradient(180deg, rgba(250,250,250,1), rgba(245,247,252,1))",
-        "dark-hero": "radial-gradient(circle at top left, rgba(245,166,35,0.18), transparent 35%), radial-gradient(circle at top right, rgba(59,92,189,0.18), transparent 32%), linear-gradient(180deg, rgba(6,10,26,1), rgba(10,16,38,1))",
+        "grid-pattern": "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
       },
       keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-8px)" },
+        flicker: {
+          "0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100%": { opacity: "1" },
+          "20%, 21.999%, 63%, 63.999%, 65%, 69.999%": { opacity: "0.8" },
         },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
+        blink: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0" },
+        }
       },
       animation: {
-        float: "float 6s ease-in-out infinite",
-        shimmer: "shimmer 2.2s linear infinite",
+        flicker: "flicker 2s infinite",
+        blink: "blink 1s step-end infinite",
       },
     },
   },

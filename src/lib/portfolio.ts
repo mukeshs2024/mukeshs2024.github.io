@@ -7,17 +7,15 @@ export const navLinks = [
 ];
 
 export const heroContent = {
-  name: "Mukesh S",
-  role: "Aspiring Data Analyst",
-  techInline: "Excel • SQL • Power BI • Python • PostgreSQL",
-  summary: "AI & Data Science student focused on Data Analytics, Business Intelligence, dashboard development, SQL analysis, and transforming data into meaningful business insights.",
+  name: "MUKESH S",
+  role: "BUILDING SCALABLE AI & DATA SYSTEMS",
+  techInline: "PRODUCTION-READY SOFTWARE • CLOUD INFRASTRUCTURE • MACHINE LEARNING",
+  summary: "ENGINEERING MISSION: ARCHITECTING AND DEPLOYING PRODUCTION-READY SOFTWARE. FOCUSED ON BUILDING SCALABLE SYSTEMS, ROBUST CLOUD INFRASTRUCTURE, AND HIGH-PERFORMANCE AI APPLICATIONS.",
   stats: [
-    { label: "Projects", value: "5+" },
-    { label: "Internships", value: "2" },
-    { label: "Hackathons", value: "2" },
-    { label: "CGPA", value: "7.0" },
+    { label: "SYSTEMS_BUILT", value: "5+" },
+    { label: "HACKATHONS", value: "5+" },
   ],
-  profileImage: "/portfolio/profile/profile.jpg",
+  profileImage: "/profile/profile.jpg",
   linkedin: "https://www.linkedin.com/in/mukesh-s-6a1a78333/",
 };
 
@@ -50,7 +48,7 @@ export const experiences = [
       "Team collaboration",
     ],
     tech: ["React", "Node.js", "Express", "MongoDB"],
-    certificateImage: "/portfolio/certificates/mern_intern.jpg",
+    certificateImage: "/certificates/mern_intern.jpg",
   },
 ];
 
@@ -85,7 +83,7 @@ export const projects = [
     githubHref: "https://github.com/mukeshs2024/tata_innovent.git",
     demoHref: null,
     status: "Completed",
-    imageFolder: "/portfolio/projects/terra-nav/",
+    imageFolder: "/projects/terra-nav/",
   },
   {
     title: "Smart Traffic Management System",
@@ -119,7 +117,7 @@ export const projects = [
     githubHref: "https://github.com/mukeshs2024/smart_traffic_management_system.git",
     demoHref: "https://smart-traffic-management-system-green.vercel.app/",
     status: "Completed",
-    imageFolder: "/portfolio/projects/smart-traffic/",
+    imageFolder: "/projects/smart-traffic/",
   },
   {
     title: "ReUseMart",
@@ -131,7 +129,7 @@ export const projects = [
     githubHref: "https://github.com/mukeshs2024/ReUseMart-",
     demoHref: null,
     status: "Completed",
-    imageFolder: "/portfolio/projects/reusemart/",
+    imageFolder: "/projects/reusemart/",
   },
   {
     title: "ExportReady",
@@ -143,7 +141,7 @@ export const projects = [
     githubHref: "https://github.com/mukeshs2024/exportready",
     demoHref: null,
     status: "In Development",
-    imageFolder: "/portfolio/projects/exportready/",
+    imageFolder: "/projects/exportready/",
   },
   {
     title: "Indian Airline Traffic Forecasting",
@@ -155,7 +153,7 @@ export const projects = [
     githubHref: null,
     demoHref: null,
     status: "Completed",
-    imageFolder: "/portfolio/projects/airline-forecasting/",
+    imageFolder: "/projects/airline-forecasting/",
   },
 ];
 
@@ -182,12 +180,12 @@ export const certifications = [
   {
     title: "Gen AI Certification",
     issuer: "AI Workflows",
-    image: "/portfolio/certificates/genai.png",
+    image: "/certificates/genai.png",
   },
   {
     title: "MERN Stack Internship",
     issuer: "Full Stack Development",
-    image: "/portfolio/certificates/mern_intern.jpg",
+    image: "/certificates/mern_intern.jpg",
   },
 ];
 
@@ -196,15 +194,15 @@ export const hackathonsAndEvents = [
     title: "Generative AI Hackathon",
     description: "Built and presented an AI-based solution during a Generative AI hackathon.",
     images: [
-      "/portfolio/images/Genai image.jpeg",
-      "/portfolio/images/Geniai image2.jpg",
+      "/images/Genai image.jpeg",
+      "/images/Geniai image2.jpg",
     ],
   },
   {
     title: "AXIOS 25 Hackathon",
     description: "Participated in team-based problem solving and project presentation.",
     images: [
-      "/portfolio/images/AXIOS.jpg",
+      "/images/AXIOS.jpg",
     ],
   },
 ];
@@ -225,7 +223,7 @@ export const contactDetails = [
   { label: "Location", value: "View Map", href: "https://www.google.com/maps/search/Coimbatore,+Tamil+Nadu" },
 ];
 
-export const resumePath = "/portfolio/resume/Mukesh_Resume.pdf";
+export const resumePath = "/resume/Mukesh_Resume.pdf";
 export const footerLinks = [
   { label: "GitHub", href: "https://github.com/mukeshs2024" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/mukesh-s-6a1a78333/" },
