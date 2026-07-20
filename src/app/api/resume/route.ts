@@ -95,9 +95,7 @@ export async function GET() {
   for (const project of projects) {
     write(`${project.title} [Status: ${project.status}]`, margin, cursorY, 9.5, true);
     cursorY -= 11.5;
-    paragraph(`Problem: ${project.problem}`, 8.5, 10.5);
-    paragraph(`Solution: ${project.solution}`, 8.5, 10.5);
-    paragraph(`Business Value: ${project.businessValue}`, 8.5, 10.5);
+    paragraph(project.description, 8.5, 10.5);
     write(`Tech Stack: ${project.tech.join(", ")}`, margin, cursorY, 8.5, false);
     cursorY -= 12;
   }

@@ -8,10 +8,10 @@ type TechBadgeProps = {
 // Clean, compact tech chips for projects/timeline
 export function TechBadge({ name, compact = false }: TechBadgeProps) {
   const logoUrl = getTechLogoUrl(name);
-  const imageSize = compact ? 14 : 18;
+  const imageSize = compact ? 12 : 14;
 
   return (
-    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-none text-xs font-mono font-bold bg-secondarybg text-heading border border-bordercol hover:border-accent hover:shadow-[0_0_8px_rgba(240,122,82,0.15)] transition-all uppercase tracking-wider">
+    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-none text-[10px] font-mono font-bold bg-transparent text-muted border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,255,255,0.2)] hover:text-heading transition-all uppercase tracking-wider">
       {logoUrl ? (
         <img
           src={logoUrl}

@@ -70,6 +70,7 @@ function StackedCard({ children, index, total }: { children: React.ReactNode, in
 export function PortfolioPage() {
   const [activeSection, setActiveSection] = useState("home");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -187,7 +188,7 @@ export function PortfolioPage() {
       </header>
 
       {/* Content wrapper */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ======================= HOME SECTION ======================= */}
         <div id="home" className="flex flex-col pb-12 border-b border-bordercol">
@@ -390,26 +391,6 @@ export function PortfolioPage() {
             </FadeUp>
           </section>
 
-          {/* EDUCATION (Brief) */}
-          <section className="py-12 border-t border-bordercol mt-12">
-            <FadeUp className="space-y-8">
-              <div>
-                <h2 className="text-3xl sm:text-4xl md:text-[48px] font-extrabold tracking-tight text-heading leading-tight uppercase font-sans font-black">
-                  [ Education ]
-                </h2>
-                <p className="text-xs text-muted uppercase tracking-[0.2em] font-mono mt-2">Academic pathway</p>
-              </div>
-              <div className="max-w-4xl bg-secondarybg border border-bordercol rounded-none p-5 shadow-none flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-activeborder transition-colors">
-                <div>
-                  <h3 className="text-xl font-bold text-heading">{education.college}</h3>
-                  <p className="text-base font-semibold text-accent mt-1">{education.degree}</p>
-                </div>
-                <div className="sm:text-right sm:border-l border-bordercol sm:pl-6 py-2">
-                  <p className="text-3xl font-extrabold text-accent mt-1">{education.duration}</p>
-                </div>
-              </div>
-            </FadeUp>
-          </section>
         </div>
 
         {/* ======================= PROJECTS SECTION ======================= */}
@@ -422,68 +403,65 @@ export function PortfolioPage() {
               <p className="text-xs text-muted uppercase tracking-[0.2em] font-mono mt-2">All project case studies</p>
             </div>
 
-            <div className="relative pt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
               {projects.map((project, idx) => {
+                const shortFilename = project.title.split(':')[0].split(' ')[0].replace(/[^a-zA-Z0-9]/g, '_').toUpperCase();
+                
                 return (
-                  <StackedCard key={idx} index={idx} total={projects.length}>
-                    <div className="grid md:grid-cols-12 gap-8 items-start">
-                      <div className="md:col-span-7 lg:col-span-8 space-y-6">
-                        <div>
-                          <h4 className="text-xs uppercase font-bold tracking-[0.1em] font-mono text-accent mb-1.5">Problem</h4>
-                          <p className="text-body text-sm md:text-base leading-relaxed">{project.problem}</p>
-                        </div>
-                        <div>
-                          <h4 className="text-xs uppercase font-bold tracking-[0.1em] font-mono text-accent mb-1.5">Solution</h4>
-                          <p className="text-body text-sm md:text-base leading-relaxed">{project.solution}</p>
-                        </div>
-                        <div>
-                          <h4 className="text-xs uppercase font-bold tracking-[0.1em] font-mono text-accent mb-1.5">Business Value</h4>
-                          <p className="text-body text-sm md:text-base leading-relaxed">{project.businessValue}</p>
-                        </div>
-                        <div>
-                          <h4 className="text-xs uppercase font-bold tracking-[0.1em] font-mono text-accent mb-1.5">Key Features</h4>
-                          <ul className="list-disc list-inside text-body text-sm md:text-base space-y-1 pl-0.5 leading-relaxed">
-                            {project.keyFeatures.map((feat, fIdx) => (
-                              <li key={fIdx}>{feat}</li>
-                            ))}
-                          </ul>
-                        </div>
+                  <div key={idx} className="group relative flex flex-col bg-[#111111] border border-[rgba(255,255,255,0.08)] rounded-none hover:border-[rgba(240,122,82,0.4)] hover:-translate-y-1 transition-all duration-300 h-full overflow-hidden cursor-pointer shadow-none">
+                    
+                    {/* Terminal Title Bar */}
+                    <div className="flex items-center justify-between px-3 py-2 border-b border-[rgba(255,255,255,0.08)] bg-[#151515]">
+                      <span className="text-[10px] font-mono font-bold text-muted uppercase tracking-widest">{shortFilename}.EXE</span>
+                      <button className="text-[#555] hover:text-accent transition-colors">
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+
+                    {/* Project Screenshot Placeholder */}
+                    <div className="relative aspect-video bg-[#0B0B0B] border-b border-[rgba(255,255,255,0.05)] flex flex-col items-center justify-center p-4 text-center">
+                      <span className="text-[10px] font-mono text-[#444] uppercase tracking-widest mb-1">------------------------------------</span>
+                      <span className="text-xs font-mono font-bold text-muted uppercase tracking-wider">PROJECT_PREVIEW.PNG</span>
+                      <span className="text-[10px] font-mono text-[#444] uppercase tracking-widest mt-1">------------------------------------</span>
+                      <span className="text-[10px] font-mono text-[#555] mt-3">Image Placeholder<br/>Screenshot will be added later</span>
+                      <span className="text-[10px] font-mono text-[#444] uppercase tracking-widest mt-3">------------------------------------</span>
+                      
+                      {/* CRT scanline effect specifically for the image area */}
+                      <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px] pointer-events-none opacity-30 mix-blend-overlay"></div>
+                    </div>
+
+                    {/* Content Area */}
+                    <div className="p-5 flex flex-col flex-grow">
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-x-2 gap-y-2 mb-4">
+                        {project.tech.slice(0, 4).map((t) => (
+                          <span key={t} className="px-2 py-1 bg-[#1A1A1A] border border-[rgba(255,255,255,0.08)] text-[10px] font-mono font-bold text-[#F07A52] uppercase tracking-widest">
+                            #{t.toUpperCase()}
+                          </span>
+                        ))}
                       </div>
 
-                      <div className="md:col-span-5 lg:col-span-4 bg-darkbg/40 border border-bordercol rounded-none p-6 space-y-6">
-                        <div>
-                          <h3 className="text-2xl font-bold text-heading tracking-tight mb-3">{project.title}</h3>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs font-semibold text-body">Status:</span>
-                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-none text-xs font-semibold ${project.status === "Completed" ? "bg-gridcol text-green-400 border border-green-800/40" : "bg-gridcol text-accent border border-activeborder"}`}>{project.status}</span>
-                          </div>
-                        </div>
+                      {/* Title */}
+                      <h3 className="text-base font-bold text-heading leading-tight mb-2 line-clamp-2 uppercase">
+                        {project.title}
+                      </h3>
 
-                        <div className="flex flex-col gap-3 pt-2">
-                          {project.githubHref ? (
-                            <a href={project.githubHref} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-4 py-2.5 border border-bordercol rounded-none text-sm font-semibold text-heading bg-gridcol hover:bg-surface transition-colors"><Github className="h-4 w-4" /> GitHub Repository</a>
-                          ) : (
-                            <span className="flex items-center justify-center gap-2 px-4 py-2.5 border border-bordercol rounded-none text-sm font-semibold text-muted cursor-not-allowed"><Github className="h-4 w-4 opacity-40" /> Private Repository</span>
-                          )}
+                      {/* Description */}
+                      <p className="text-sm font-mono text-muted leading-relaxed line-clamp-3 mb-6">
+                        {project.description}
+                      </p>
 
-                          {project.demoHref ? (
-                            <a href={project.demoHref} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-4 py-2.5 border border-activeborder rounded-none text-sm font-semibold text-heading bg-gridcol hover:bg-orange-700 transition-colors"><ExternalLink className="h-4 w-4" /> Live Demo</a>
-                          ) : (
-                            <span className="flex items-center justify-center gap-2 px-4 py-2.5 border border-bordercol rounded-none text-sm font-semibold text-muted cursor-not-allowed"><ExternalLink className="h-4 w-4 opacity-40" /> Demo Unavailable</span>
-                          )}
-                        </div>
-
-                        <div className="space-y-3 pt-2">
-                          <h4 className="text-xs uppercase font-bold tracking-[0.1em] font-mono text-accent">Tech Stack</h4>
-                          <div className="flex flex-wrap gap-1.5">
-                            {project.tech.map((t) => (
-                              <TechBadge key={t} name={t} compact />
-                            ))}
-                          </div>
-                        </div>
+                      {/* Button */}
+                      <div className="mt-auto pt-4 border-t border-[rgba(255,255,255,0.05)]">
+                        <button 
+                          onClick={() => setSelectedProject(project)}
+                          className="w-full py-1 text-[11px] font-mono font-bold text-muted uppercase tracking-[0.2em] group-hover:text-[#F07A52] transition-colors flex items-center justify-center focus:outline-none"
+                        >
+                          VIEW PROJECT
+                        </button>
                       </div>
                     </div>
-                  </StackedCard>
+                  </div>
                 );
               })}
             </div>
@@ -707,6 +685,64 @@ export function PortfolioPage() {
                   className="max-w-full max-h-[85vh] object-contain rounded-none"
                 />
               )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ======================= PROJECT DETAILS MODAL ======================= */}
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedProject(null)}
+            className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-2xl w-full bg-[#111111] border border-[rgba(255,255,255,0.08)] rounded-none shadow-2xl p-8"
+            >
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-4 right-4 text-[#555] hover:text-accent transition-colors focus:outline-none"
+              >
+                <X className="h-5 w-5" />
+              </button>
+              
+              <h3 className="text-2xl font-bold text-heading uppercase tracking-tight mb-2 pr-8">{selectedProject.title}</h3>
+              <p className="text-sm font-mono font-bold text-accent uppercase tracking-widest mb-6">Status: {selectedProject.status}</p>
+
+              <p className="text-base font-mono text-muted leading-relaxed mb-8">{selectedProject.description}</p>
+              
+              <div className="mb-8">
+                <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] font-mono text-[#666] mb-3">TECH STACK</h4>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProject.tech.map((t) => (
+                    <span key={t} className="px-2 py-1 bg-[#1A1A1A] border border-[rgba(255,255,255,0.08)] text-[10px] font-mono font-bold text-[#F07A52] uppercase tracking-widest">
+                      #{t.toUpperCase()}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-[rgba(255,255,255,0.05)]">
+                {selectedProject.githubHref ? (
+                  <a href={selectedProject.githubHref} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#151515] border border-[rgba(255,255,255,0.08)] text-sm font-semibold text-heading hover:border-accent hover:text-accent transition-colors"><Github className="h-4 w-4" /> GITHUB REPOSITORY</a>
+                ) : (
+                  <span className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#151515] border border-[rgba(255,255,255,0.05)] text-sm font-semibold text-[#555] cursor-not-allowed"><Github className="h-4 w-4 opacity-40" /> PRIVATE REPOSITORY</span>
+                )}
+
+                {selectedProject.demoHref ? (
+                  <a href={selectedProject.demoHref} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-accent text-darkbg text-sm font-semibold hover:bg-orange-600 transition-colors"><ExternalLink className="h-4 w-4" /> LIVE DEMO</a>
+                ) : (
+                  <span className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#151515] border border-[rgba(255,255,255,0.05)] text-sm font-semibold text-[#555] cursor-not-allowed"><ExternalLink className="h-4 w-4 opacity-40" /> DEMO UNAVAILABLE</span>
+                )}
+              </div>
             </motion.div>
           </motion.div>
         )}
