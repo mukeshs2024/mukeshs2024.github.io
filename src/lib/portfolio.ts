@@ -52,13 +52,81 @@ export const experiences = [
 
 export const projects = [
   {
-    title: "TERRA-NAV: AI-Powered Off-Road Terrain Intelligence System",
-    description: "AI-powered terrain perception system that predicts road conditions in real time using computer vision and FastAPI services.",
-    tech: ["FastAPI", "React", "YOLOv8", "WebSocket"],
-    githubHref: "https://github.com/mukeshs2024/tata_innovent.git",
-    demoHref: null,
-    status: "Completed",
-    imageFolder: "/projects/terra-nav/",
+    title: "VOLTIX:\nAI-POWERED AUTONOMOUS\nBUILDING OPERATIONS PLATFORM",
+    description: "AI-powered Digital Twin platform that simulates commercial building operations and coordinates multiple autonomous AI agents to continuously optimize HVAC, energy consumption, battery usage, and grid interaction in real time.",
+    tech: ["Next.js", "FastAPI", "LangGraph", "TypeScript", "Python", "Digital-Twin"],
+    githubHref: "https://github.com/mukeshs2024/Voltix",
+    demoHref: "#",
+    status: "ACTIVE DEVELOPMENT",
+    imageFolder: "/projects/voltix/",
+    carouselImages: [
+      "/images/voltix.png",
+      "/images/voltix1.png",
+      "/images/voltix2.png",
+      "/images/voltix3.png",
+      "/images/voltix4.png"
+    ],
+    overview: "Voltix is an AI-powered Autonomous Building Operations Platform that combines a Digital Twin, real-time sensor simulation, and collaborative multi-agent intelligence to optimize commercial building energy systems.\n\nThe platform continuously monitors building telemetry, enables specialized AI agents to analyze operational conditions, negotiates optimization strategies through a consensus engine, and applies intelligent control actions through a continuous closed-loop optimization process.",
+    keyFeatures: [
+      "Digital Twin Simulation",
+      "Real-Time Sensor Engine",
+      "Autonomous Multi-Agent AI",
+      "AI Consensus Engine",
+      "HVAC Optimization",
+      "Energy Optimization",
+      "Battery Optimization",
+      "Grid Optimization",
+      "AI Explainability",
+      "Continuous Closed Feedback Loop"
+    ],
+    workflow: [
+      "Scenario Selection",
+      "Simulation Engine",
+      "Sensor Simulation",
+      "Digital Twin",
+      "Occupancy Agent",
+      "HVAC Agent",
+      "Energy Agent",
+      "Grid Agent",
+      "Equipment Agent",
+      "Consensus Engine",
+      "Optimization Plan",
+      "Building Response",
+      "Digital Twin Update",
+      "Continuous Optimization"
+    ],
+    highlights: [
+      "Production-inspired Digital Twin Architecture",
+      "Multi-Agent AI Coordination",
+      "Real-Time Simulation Engine",
+      "Event-Driven System Design",
+      "Consensus-Based Decision Making",
+      "Explainable AI",
+      "Continuous Optimization Loop",
+      "Interactive Execution Pipeline"
+    ],
+    fullTechStack: [
+      "Next.js", "React", "TypeScript", "TailwindCSS", "FastAPI", "Python", "LangGraph", "WebSockets", "PostgreSQL", "Supabase"
+    ],
+    roleDesc: "Designed and developed the complete platform architecture including:",
+    myRole: [
+      "Digital Twin Modeling",
+      "Real-Time Simulation Engine",
+      "Frontend Dashboard",
+      "Backend APIs",
+      "Multi-Agent AI Workflow",
+      "Consensus Engine",
+      "AI Explainability",
+      "Interactive Visualization"
+    ],
+    metrics: [
+      "5 Autonomous AI Agents",
+      "1 Digital Twin",
+      "1 Consensus Engine",
+      "12+ Telemetry Streams",
+      "20+ Interactive Dashboard Components",
+      "Continuous Closed-Loop Optimization"
+    ]
   },
   {
     title: "Smart Traffic Management System",

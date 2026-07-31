@@ -71,6 +71,7 @@ export function PortfolioPage() {
   const [activeSection, setActiveSection] = useState("home");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -419,16 +420,23 @@ export function PortfolioPage() {
                     </div>
 
                     {/* Project Screenshot Placeholder */}
-                    <div className="relative aspect-video bg-[#0B0B0B] border-b border-[rgba(255,255,255,0.05)] flex flex-col items-center justify-center p-4 text-center">
-                      <span className="text-[10px] font-mono text-[#444] uppercase tracking-widest mb-1">------------------------------------</span>
-                      <span className="text-xs font-mono font-bold text-muted uppercase tracking-wider">PROJECT_PREVIEW.PNG</span>
-                      <span className="text-[10px] font-mono text-[#444] uppercase tracking-widest mt-1">------------------------------------</span>
-                      <span className="text-[10px] font-mono text-[#555] mt-3">Image Placeholder<br/>Screenshot will be added later</span>
-                      <span className="text-[10px] font-mono text-[#444] uppercase tracking-widest mt-3">------------------------------------</span>
-                      
-                      {/* CRT scanline effect specifically for the image area */}
-                      <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px] pointer-events-none opacity-30 mix-blend-overlay"></div>
-                    </div>
+                    {project.title.includes('VOLTIX') ? (
+                      <div className="relative aspect-video bg-[#0B0B0B] border-b border-[rgba(255,255,255,0.05)] overflow-hidden">
+                        <img src="/images/voltix.png" alt="Voltix Dashboard" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px] pointer-events-none opacity-30 mix-blend-overlay"></div>
+                      </div>
+                    ) : (
+                      <div className="relative aspect-video bg-[#0B0B0B] border-b border-[rgba(255,255,255,0.05)] flex flex-col items-center justify-center p-4 text-center">
+                        <span className="text-[10px] font-mono text-[#444] uppercase tracking-widest mb-1">------------------------------------</span>
+                        <span className="text-xs font-mono font-bold text-muted uppercase tracking-wider">PROJECT_PREVIEW.PNG</span>
+                        <span className="text-[10px] font-mono text-[#444] uppercase tracking-widest mt-1">------------------------------------</span>
+                        <span className="text-[10px] font-mono text-[#555] mt-3">Image Placeholder<br/>Screenshot will be added later</span>
+                        <span className="text-[10px] font-mono text-[#444] uppercase tracking-widest mt-3">------------------------------------</span>
+                        
+                        {/* CRT scanline effect specifically for the image area */}
+                        <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px] pointer-events-none opacity-30 mix-blend-overlay"></div>
+                      </div>
+                    )}
 
                     {/* Content Area */}
                     <div className="p-5 flex flex-col flex-grow">
@@ -454,7 +462,7 @@ export function PortfolioPage() {
                       {/* Button */}
                       <div className="mt-auto pt-4 border-t border-[rgba(255,255,255,0.05)]">
                         <button 
-                          onClick={() => setSelectedProject(project)}
+                          onClick={() => { setSelectedProject(project); setCurrentSlide(0); }}
                           className="w-full py-1 text-[11px] font-mono font-bold text-muted uppercase tracking-[0.2em] group-hover:text-[#F07A52] transition-colors flex items-center justify-center focus:outline-none"
                         >
                           VIEW PROJECT
@@ -705,43 +713,163 @@ export function PortfolioPage() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-2xl w-full bg-[#111111] border border-[rgba(255,255,255,0.08)] rounded-none shadow-2xl p-8"
+              className="relative max-w-2xl w-full max-h-[90vh] bg-[#111111] border border-[rgba(255,255,255,0.08)] rounded-none shadow-2xl p-8 flex flex-col"
             >
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 text-[#555] hover:text-accent transition-colors focus:outline-none"
+                className="absolute top-4 right-4 text-[#555] hover:text-accent transition-colors focus:outline-none z-[11000]"
               >
                 <X className="h-5 w-5" />
               </button>
               
-              <h3 className="text-2xl font-bold text-heading uppercase tracking-tight mb-2 pr-8">{selectedProject.title}</h3>
-              <p className="text-sm font-mono font-bold text-accent uppercase tracking-widest mb-6">Status: {selectedProject.status}</p>
+              <div className="flex-1 overflow-y-auto pr-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#444 transparent' }}>
+                <h3 className="text-2xl font-bold text-heading uppercase tracking-tight mb-2 pr-8 whitespace-pre-wrap">{selectedProject.title}</h3>
+                <p className="text-sm font-mono font-bold text-accent uppercase tracking-widest mb-6">Status: {selectedProject.status}</p>
 
-              <p className="text-base font-mono text-muted leading-relaxed mb-8">{selectedProject.description}</p>
-              
-              <div className="mb-8">
-                <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] font-mono text-[#666] mb-3">TECH STACK</h4>
-                <div className="flex flex-wrap gap-2">
-                  {selectedProject.tech.map((t) => (
-                    <span key={t} className="px-2 py-1 bg-[#1A1A1A] border border-[rgba(255,255,255,0.08)] text-[10px] font-mono font-bold text-[#F07A52] uppercase tracking-widest">
-                      #{t.toUpperCase()}
-                    </span>
-                  ))}
+                {/* Carousel */}
+                {(selectedProject as any).carouselImages && (selectedProject as any).carouselImages.length > 0 && (
+                  <div className="relative w-full aspect-video bg-[#0B0B0B] border border-[rgba(255,255,255,0.05)] overflow-hidden mb-8 group">
+                    <img 
+                      src={(selectedProject as any).carouselImages[currentSlide]} 
+                      alt={`${selectedProject.title} screenshot ${currentSlide + 1}`} 
+                      className="w-full h-full object-cover" 
+                    />
+                    
+                    {/* Navigation buttons */}
+                    <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); setCurrentSlide((prev) => (prev === 0 ? (selectedProject as any).carouselImages.length - 1 : prev - 1)); }}
+                        className="p-2 bg-black/50 hover:bg-black/80 text-white rounded-full border border-[rgba(255,255,255,0.1)] transition-colors"
+                      >
+                        <ArrowRight className="w-5 h-5 rotate-180" />
+                      </button>
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); setCurrentSlide((prev) => (prev === (selectedProject as any).carouselImages.length - 1 ? 0 : prev + 1)); }}
+                        className="p-2 bg-black/50 hover:bg-black/80 text-white rounded-full border border-[rgba(255,255,255,0.1)] transition-colors"
+                      >
+                        <ArrowRight className="w-5 h-5" />
+                      </button>
+                    </div>
+
+                    {/* Dots indicator */}
+                    <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+                      {((selectedProject as any).carouselImages).map((_: string, idx: number) => (
+                        <button
+                          key={idx}
+                          onClick={(e) => { e.stopPropagation(); setCurrentSlide(idx); }}
+                          className={`w-2 h-2 rounded-full transition-all ${currentSlide === idx ? "bg-[#F07A52] w-4" : "bg-white/40 hover:bg-white/80"}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Conditional rendering for detailed Voltix content */}
+                {(selectedProject as any).overview ? (
+                  <div className="space-y-8">
+                    <section>
+                      <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] font-mono text-[#666] mb-3 border-b border-[rgba(255,255,255,0.05)] pb-2">PROJECT OVERVIEW</h4>
+                      <p className="text-sm font-mono text-muted leading-relaxed whitespace-pre-wrap">{(selectedProject as any).overview}</p>
+                    </section>
+
+                    <section>
+                      <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] font-mono text-[#666] mb-3 border-b border-[rgba(255,255,255,0.05)] pb-2">KEY FEATURES</h4>
+                      <ul className="list-none space-y-2">
+                        {((selectedProject as any).keyFeatures || []).map((feature: string, i: number) => (
+                          <li key={i} className="text-sm font-mono text-muted flex items-start">
+                            <span className="text-[#F07A52] mr-2">•</span> {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    <section>
+                      <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] font-mono text-[#666] mb-3 border-b border-[rgba(255,255,255,0.05)] pb-2">AUTONOMOUS WORKFLOW</h4>
+                      <div className="flex flex-col items-center space-y-2 py-4 bg-[#0B0B0B] border border-[rgba(255,255,255,0.05)]">
+                        {((selectedProject as any).workflow || []).map((step: string, i: number, arr: string[]) => (
+                          <div key={i} className="flex flex-col items-center w-full">
+                            <span className="text-xs font-mono text-heading bg-[#151515] border border-[rgba(255,255,255,0.08)] px-4 py-2 text-center w-3/4 max-w-xs">{step}</span>
+                            {i < arr.length - 1 && <span className="text-[#555] my-2 text-lg">↓</span>}
+                          </div>
+                        ))}
+                      </div>
+                    </section>
+
+                    <section>
+                      <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] font-mono text-[#666] mb-3 border-b border-[rgba(255,255,255,0.05)] pb-2">TECHNICAL HIGHLIGHTS</h4>
+                      <ul className="list-none space-y-2">
+                        {((selectedProject as any).highlights || []).map((highlight: string, i: number) => (
+                          <li key={i} className="text-sm font-mono text-muted flex items-start">
+                            <span className="text-[#F07A52] mr-2">•</span> {highlight}
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    <section>
+                      <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] font-mono text-[#666] mb-3 border-b border-[rgba(255,255,255,0.05)] pb-2">TECH STACK</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {((selectedProject as any).fullTechStack || selectedProject.tech).map((t: string) => (
+                          <span key={t} className="px-2 py-1 bg-[#1A1A1A] border border-[rgba(255,255,255,0.08)] text-[10px] font-mono font-bold text-[#F07A52] uppercase tracking-widest">
+                            #{t.toUpperCase()}
+                          </span>
+                        ))}
+                      </div>
+                    </section>
+
+                    <section>
+                      <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] font-mono text-[#666] mb-3 border-b border-[rgba(255,255,255,0.05)] pb-2">MY ROLE</h4>
+                      <p className="text-sm font-mono text-muted mb-3">{(selectedProject as any).roleDesc}</p>
+                      <ul className="list-none space-y-2">
+                        {((selectedProject as any).myRole || []).map((roleItem: string, i: number) => (
+                          <li key={i} className="text-sm font-mono text-muted flex items-start">
+                            <span className="text-[#F07A52] mr-2">•</span> {roleItem}
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    <section>
+                      <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] font-mono text-[#666] mb-3 border-b border-[rgba(255,255,255,0.05)] pb-2">PROJECT METRICS</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {((selectedProject as any).metrics || []).map((metric: string, i: number) => (
+                          <div key={i} className="bg-[#151515] border border-[rgba(255,255,255,0.05)] p-3 text-center flex items-center justify-center">
+                            <span className="text-xs font-mono font-bold text-[#F07A52] tracking-wide">{metric}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </section>
+                  </div>
+                ) : (
+                  <>
+                    <p className="text-base font-mono text-muted leading-relaxed mb-8">{selectedProject.description}</p>
+                    
+                    <div className="mb-8">
+                      <h4 className="text-[10px] uppercase font-bold tracking-[0.2em] font-mono text-[#666] mb-3">TECH STACK</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedProject.tech.map((t) => (
+                          <span key={t} className="px-2 py-1 bg-[#1A1A1A] border border-[rgba(255,255,255,0.08)] text-[10px] font-mono font-bold text-[#F07A52] uppercase tracking-widest">
+                            #{t.toUpperCase()}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-[rgba(255,255,255,0.05)] mt-8">
+                  {selectedProject.githubHref ? (
+                    <a href={selectedProject.githubHref} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#151515] border border-[rgba(255,255,255,0.08)] text-sm font-semibold text-heading hover:border-accent hover:text-accent transition-colors"><Github className="h-4 w-4" /> GITHUB REPOSITORY</a>
+                  ) : (
+                    <span className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#151515] border border-[rgba(255,255,255,0.05)] text-sm font-semibold text-[#555] cursor-not-allowed"><Github className="h-4 w-4 opacity-40" /> PRIVATE REPOSITORY</span>
+                  )}
+
+                  {selectedProject.demoHref ? (
+                    <a href={selectedProject.demoHref} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-accent text-darkbg text-sm font-semibold hover:bg-orange-600 transition-colors"><ExternalLink className="h-4 w-4" /> LIVE DEMO</a>
+                  ) : (
+                    <span className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#151515] border border-[rgba(255,255,255,0.05)] text-sm font-semibold text-[#555] cursor-not-allowed"><ExternalLink className="h-4 w-4 opacity-40" /> DEMO UNAVAILABLE</span>
+                  )}
                 </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-[rgba(255,255,255,0.05)]">
-                {selectedProject.githubHref ? (
-                  <a href={selectedProject.githubHref} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#151515] border border-[rgba(255,255,255,0.08)] text-sm font-semibold text-heading hover:border-accent hover:text-accent transition-colors"><Github className="h-4 w-4" /> GITHUB REPOSITORY</a>
-                ) : (
-                  <span className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#151515] border border-[rgba(255,255,255,0.05)] text-sm font-semibold text-[#555] cursor-not-allowed"><Github className="h-4 w-4 opacity-40" /> PRIVATE REPOSITORY</span>
-                )}
-
-                {selectedProject.demoHref ? (
-                  <a href={selectedProject.demoHref} target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-accent text-darkbg text-sm font-semibold hover:bg-orange-600 transition-colors"><ExternalLink className="h-4 w-4" /> LIVE DEMO</a>
-                ) : (
-                  <span className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#151515] border border-[rgba(255,255,255,0.05)] text-sm font-semibold text-[#555] cursor-not-allowed"><ExternalLink className="h-4 w-4 opacity-40" /> DEMO UNAVAILABLE</span>
-                )}
               </div>
             </motion.div>
           </motion.div>
